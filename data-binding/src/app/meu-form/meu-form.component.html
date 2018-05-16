@@ -1,0 +1,127 @@
+<p>
+  meu-form works!
+</p>
+<section class="container">
+
+  <article>
+    <h3>Two-way data binding</h3>
+    <input type="text"
+    [value]="nome"
+    (input)="nome = $event.target.value"
+
+    />
+
+    <input type="text"
+    [ngModel]="nome"
+    (ngModelChange)="nome = $event"
+    />
+
+    <input type="text" [(ngModel)]="nome">
+
+    <input type="text" bindon-ngModel="nome">
+
+
+
+    <p>Você digitou: nome {{ nome }}</p>
+
+
+    <input type="text" [(ngModel)]="pessoa.nome">
+  <input type="text" [(ngModel)]="pessoa.idade">
+
+  <p>Você digitou: nome {{ pessoa.nome }} e a minha idade é {{pessoa.idade}}</p>
+  </article>
+
+    <article>
+      <h3>Event Binding</h3>
+      <button (click)="botaoClicado()"
+       class="btn btn-primary">
+        Clique aqui
+      </button>
+  <br><br><br>
+  <input type="text"
+  (keyup)="onKeyUP($event)"
+  (keyup.enter)="salvarValor(campoImput.value)"
+  (blur)="salvarValor(campoImput.value)"
+  #campoImput
+  >
+  <p>Valor Atual: {{ valorAual }}</p>
+  <p>Valor salvo: {{ valorSalvo }}</p>
+
+
+  <span
+  (mouseover)="onMouseOverOut()"
+  (mouseout)="onMouseOverOut()"
+  [class.highlight]="isMouseOver"
+
+
+  >Passe o mouse {{ isMouseOver }}</span>
+
+    </article>
+    <br><br><br><br><br><br><br>
+    <article>
+      <h3>Interpolation/Interpolação</h3>
+      <p>
+        String renderizada com Interpolação: {{ url }}
+      </p>
+      <p>
+        Resultado 1+1 é : {{1+1}}
+      </p>
+      <p>
+        Resultado 1+1 não é: {{1+1 +getValor()}}
+      </p>
+      <p>
+        Curso de Angular e gosto do curso : {{ cursoAngular && getCurtirCurso()}}
+      </p>
+    </article>
+    <article>
+      <h3>Property binding</h3>
+      <img src="{{ urlImagen }}">
+      <img [src]="urlImagen">
+      <img bind-src="urlImagen">
+    </article>
+
+    <article>
+      <h3>Class e Style Binding</h3>
+      <div>
+        Selecione uma classe:
+        <select #classe (change)="0">
+          <option value="success">Success</option>
+          <option value="info">Info</option>
+          <option value="warning">Warning</option>
+          <option value="danger" >Danger</option>
+        </select>
+      </div>
+      <br><br><br>
+
+      <div class="alert alert-{{ classe.value }}"  role="alert">
+        Texto será colorido conforme a seleção do combobox
+      </div>
+
+      <br><br><br>
+
+        <div class="alert " role="alert"
+        [class.alert-success]="classe.value == 'success'"
+        >success</div>
+        <div class="alert" role="alert"
+        [class.alert-info]="classe.value == 'info'"
+        >info</div>
+        <div class="alert " role="alert"
+        [class.alert-warning]="classe.value == 'warning'"
+        >warning</div>
+        <div class="alert" role="alert"
+        [class.alert-danger]="classe.value == 'danger'"
+        >danger</div>
+
+        <br><br><br>
+
+        <div class="alert alert-danger" role="alert"
+        [style.display]="classe.value == 'danger' ? 'block' : 'none'"
+
+        >danger teste select property binding class</div>
+
+    </article>
+
+    <article>
+
+    </article>
+  </section>

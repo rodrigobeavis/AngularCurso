@@ -1,12 +1,31 @@
-<section class="container">
+<!-- <section class="container">
 
 <article>
   <h3>Two-way data binding</h3>
   <input type="text"
   [value]="nome"
-  (input)="nome"
+  (input)="nome = $event.target.value"
+
   />
+
+  <input type="text"
+  [ngModel]="nome"
+  (ngModelChange)="nome = $event"
+  />
+
+  <input type="text" [(ngModel)]="nome">
+
+  <input type="text" bindon-ngModel="nome">
+
+
+
   <p>Você digitou: nome {{ nome }}</p>
+
+
+  <input type="text" [(ngModel)]="pessoa.nome">
+<input type="text" [(ngModel)]="pessoa.idade">
+
+<p>Você digitou: nome {{ pessoa.nome }} e a minha idade é {{pessoa.idade}}</p>
 </article>
 
   <article>
@@ -30,6 +49,8 @@
 (mouseover)="onMouseOverOut()"
 (mouseout)="onMouseOverOut()"
 [class.highlight]="isMouseOver"
+
+
 >Passe o mouse {{ isMouseOver }}</span>
 
   </article>
@@ -96,4 +117,10 @@
       >danger teste select property binding class</div>
 
   </article>
-</section>
+
+  <article>
+
+  </article>
+</section> -->
+
+<app-meu-form></app-meu-form>

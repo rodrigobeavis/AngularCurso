@@ -12,12 +12,13 @@ export class DataBindingComponent implements OnInit {
   // urlImagen:string = "http://lorempixel.com/g/400/200/";
   urlImagen : string = 'http://via.placeholder.com/400x200';
 
-  nome:string = "abc";
+
 
   valorAual: string = '';
   valorSalvo: string = '';
 
   isMouseOver: boolean = false;
+
 
 
   constructor() { }
