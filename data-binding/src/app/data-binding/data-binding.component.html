@@ -1,4 +1,14 @@
 <section class="container">
+
+<article>
+  <h3>Two-way data binding</h3>
+  <input type="text"
+  [value]="nome"
+  (input)="nome"
+  />
+  <p>Você digitou: nome {{ nome }}</p>
+</article>
+
   <article>
     <h3>Event Binding</h3>
     <button (click)="botaoClicado()"
@@ -16,7 +26,7 @@
 <p>Valor salvo: {{ valorSalvo }}</p>
 
 
-<span 
+<span
 (mouseover)="onMouseOverOut()"
 (mouseout)="onMouseOverOut()"
 [class.highlight]="isMouseOver"
