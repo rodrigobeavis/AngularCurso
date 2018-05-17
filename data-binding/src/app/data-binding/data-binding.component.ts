@@ -6,49 +6,50 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./data-binding.component.css']
 })
 export class DataBindingComponent implements OnInit {
-
-  url : string = 'http://loaine.traning';
-  cursoAngular:Boolean = true;
-  // urlImagen:string = "http://lorempixel.com/g/400/200/";
-  urlImagen : string = 'http://via.placeholder.com/400x200';
-
-
+  url: string = 'http://loaine.traning';
+  cursoAngular: Boolean = true;
+  // urlImagen:string = 'http://lorempixel.com/g/400/200/';
+  urlImagen: string = 'http://via.placeholder.com/400x200';
 
   valorAual: string = '';
   valorSalvo: string = '';
 
   isMouseOver: boolean = false;
 
- nomeDoCurso:string ='Angular';
+  nomeDoCurso: string = 'Angular';
+  valorInicial = 15;
 
-  constructor() { }
+  onMudouValor(evento) {
+    console.log(evento);
+  }
 
 
-  onMouseOverOut(){
+  onMouseOverOut() {
     this.isMouseOver = !this.isMouseOver;
     console.log(this.isMouseOver);
   }
 
-botaoClicado(){
-  alert('clique no botão');
-}
+  botaoClicado() {
+    alert('clique no botão');
+  }
 
-onKeyUP(event:KeyboardEvent){
-  this.valorAual = ((<HTMLInputElement>event.target).value);
-}
+  onKeyUP(event: KeyboardEvent) {
+    this.valorAual = (<HTMLInputElement>event.target).value;
+  }
 
-salvarValor(valor){
-  this.valorSalvo = valor;
-}
-  getValor(){
+  salvarValor(valor) {
+    this.valorSalvo = valor;
+  }
+  getValor() {
     return 1;
   }
 
-  getCurtirCurso(){
+  getCurtirCurso() {
     return true;
   }
 
-  ngOnInit() {
-  }
 
+  constructor() {}
+
+  ngOnInit() {}
 }
