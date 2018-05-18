@@ -8,6 +8,7 @@ import { DataBindingComponent } from './data-binding/data-binding.component';
 import { MeuFormModule } from './meu-form/meu-form.module';
 import { InputPropetyComponent } from './input-propety/input-propety.component';
 import { OutputPropetyComponent } from './output-propety/output-propety.component';
+import { CicloComponent } from './ciclo/ciclo.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { OutputPropetyComponent } from './output-propety/output-propety.componen
     AppComponent,
     DataBindingComponent,
     InputPropetyComponent,
-    OutputPropetyComponent
+    OutputPropetyComponent,
+    CicloComponent
   ],
   imports: [
     BrowserModule,
