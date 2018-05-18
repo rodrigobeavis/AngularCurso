@@ -16,7 +16,7 @@ export class DataBindingComponent implements OnInit {
 
   isMouseOver: boolean = false;
 
-  nomeDoCurso: string = 'Angular';
+  nomeDoCurso:string = 'Angular';
   valorInicial = 15;
 
   onMudouValor(evento) {
