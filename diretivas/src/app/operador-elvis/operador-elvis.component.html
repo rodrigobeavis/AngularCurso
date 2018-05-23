@@ -1,0 +1,10 @@
+<p>
+  operador-elvis works!
+</p>
+
+
+<p>Responável: {{ tarefa.desc }}</p>
+<!-- <p>{{ tarefa.responsavel.nome }}</p> -->
+<p>Responável: {{ tarefa.responsavel.nome != null ?  tarefa.responsavel.nome : '' }}</p>
+
+<p>Responável: {{ tarefa.responsavel?.usuario?.nome }}</p>
