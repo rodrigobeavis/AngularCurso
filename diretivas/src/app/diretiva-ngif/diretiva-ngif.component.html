@@ -23,6 +23,28 @@
 
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+<h5>
+  *ngElse
+</h5>
+
+
+<div *ngIf="mostrarCursos">
+  Mostrar Lista de cursos.
+</div>
+
+<div *ngElse="mostrarCursos">
+  Esconder Lista de cursos.
+</div>
+
+
+
+<br>
+<button type="button" class="btn btn-primary" (click)="onMostrarCursos()">button</button>
+
+
+
 <!--
 <template [ngIf]="mostrarCursos">
   <div>lista de cursos</div>
