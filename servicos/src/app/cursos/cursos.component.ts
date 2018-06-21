@@ -37,8 +37,8 @@ export class CursosComponent implements OnInit {
     //   // }
     // );
 
-    CursoService.criouNovoCurso.subscribe(
-     curso => console.log(curso);
+    CursosService.criouNovoCurso.subscribe(
+     curso => console.log(curso)
     );
 
   }
