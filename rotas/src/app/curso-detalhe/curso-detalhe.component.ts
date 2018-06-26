@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+import { CursosService } from '../cursos/cursos.service';
 
 
 @Component({
@@ -9,14 +11,36 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CursoDetalheComponent implements OnInit {
 
-  id: string;
+  id: number;
+  inscricao: Subscription;
+  curso: any;
 
-  constructor(private route: ActivatedRoute) {
-    console.log(this.route);
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private cursoService: CursosService
+  ) {
+
+    /*
     this.id = this.route.snapshot.params['id'];
+    console.log(this.route);
+    */
   }
 
   ngOnInit() {
+    this.inscricao = this.route.params.subscribe(
+    (params: any) => {
+      this.id = params['id'];
+      this.curso = this.cursoService.getCurso(this.id);
+      if (this.curso == null) {
+        this.router.navigate(['/naoEncontrado']);
+      }
+    }
+    );
+  }
+
+  OnDestroy() {
+    this.inscricao.unsubscribe();
   }
 
 }
