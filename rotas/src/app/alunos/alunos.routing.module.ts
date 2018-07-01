@@ -8,12 +8,13 @@ import { AlunosComponent } from './alunos.component';
 
 const alunosRotes: Routes = [
     {
-        path: 'alunos', component: AlunosComponent, children: [
+        path: '', component: AlunosComponent, children: [
             { path: 'novo', component: AlunoFormComponent },
             { path: ':id', component: AlunoDetalheComponent },
             { path: ':id/:editar', component: AlunoFormComponent }
         ]
-    }];
+    }
+  ];
 
 @NgModule({
     imports: [RouterModule.forChild(alunosRotes)],

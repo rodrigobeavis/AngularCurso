@@ -36,7 +36,7 @@ export class CursosComponent implements OnInit {
   }
 
   proximaPagina() {
-    //this.pagina++;
+    // this.pagina++;
     this.router.navigate(['/cursos'],
       { queryParams: { 'pagina': ++this.pagina } });
   }
