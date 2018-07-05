@@ -14,12 +14,12 @@ export class AlunosGuard implements CanActivateChild{
 
         console.log("guarda de rota filha Alunos");
 
-        console.log(route);
-        console.log(state);
+        //console.log(route);
+        //console.log(state);
         
         if (state.url.includes('editar')) {
-            alert('usuário sem acesso.');
-            return false;
+           // alert('usuário sem acesso.');
+            // return false;
         }
         
 
