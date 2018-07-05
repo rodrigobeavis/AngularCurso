@@ -15,7 +15,7 @@ export class AlunoFormComponent implements OnInit, IFormCanDeactivate {
 
   aluno: any = {};
   inscricao: Subscription;
- private formMudou = false;
+  private formMudou = false;
 
   constructor(
     private route: ActivatedRoute,
