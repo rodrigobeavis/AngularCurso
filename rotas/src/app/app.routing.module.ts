@@ -9,18 +9,19 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { CursosGuard } from './guards/cursos.guard';
-import { AlunosGuard } from './guards/aunos.guard';
 
 const appRoutes: Routes = [
   {path: 'cursos', 
     loadChildren: 'app/cursos/cursos.module#CursosModule',
     canActivate: [AuthGuard],
-    canActivateChild: [CursosGuard]
+    canActivateChild: [CursosGuard],
+    canLoad: [AuthGuard]
   },
     
   {path: 'alunos', 
     loadChildren: 'app/alunos/alunos.module#AlunosModule',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard]
    // canActivateChild: [AlunosGuard]
   },
   // { path: 'cursos', component: CursosComponent },
