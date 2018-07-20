@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 // import { TemplateFormComponent } from './template-form/template-form.component';
 import { DataFormComponent } from './data-form/data-form.component';
 import { TemplateFormModule } from './template-form/template-form.module';
+// import { FormDebugComponent } from './form-debug/form-debug.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     // TemplateFormComponent,
     DataFormComponent
+    // FormDebugComponent
   ],
   imports: [
     BrowserModule,
