@@ -25,7 +25,7 @@
     <div class="form-group " [ngClass]="aplicaCssErro(cep)">
       <div class="col-md-3">
         <label for="cep" class="control-label">CEP</label>
-        <input id="cep" name="cep" ngModel required #cep="ngModel" type="text" class="form-control">
+        <input id="cep" name="cep" ngModel required #cep="ngModel" type="text" class="form-control" (blur)="consultaCEP($event.target.value)">
         <app-campo-control-erro [mostrarErro]="verificaValidTouched(cep)" msgErro="CEP é Obrigatório.">
         </app-campo-control-erro>
       </div>
