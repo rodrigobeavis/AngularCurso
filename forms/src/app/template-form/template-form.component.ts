@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 // import 'rxjs/add/operator/map';
-import { map } from "rxjs/operators";
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-template-form',
@@ -11,15 +11,15 @@ import { map } from "rxjs/operators";
 export class TemplateFormComponent implements OnInit {
 
 
-// usuario: any = {
-//   'nome': 'Rodrigo',
-//   'email': 'rodrigo@email.com'
-// };
+  // usuario: any = {
+  //   'nome': 'Rodrigo',
+  //   'email': 'rodrigo@email.com'
+  // };
 
-usuario: any = {
-  'nome': null,
-  'email': null
-};
+  usuario: any = {
+    'nome': null,
+    'email': null
+  };
 
   onSubmit(form) {
     console.log(form);
@@ -33,32 +33,75 @@ usuario: any = {
   }
 
   verificaValidTouched(campo) {
-    return  !campo.valid && campo.touched;
+    return !campo.valid && campo.touched;
   }
 
-aplicaCssErro(campo) {
-  return {
-    'has-error': this.verificaValidTouched(campo),
-    'has-feedback': this.verificaValidTouched(campo)
-  };
-}
+  aplicaCssErro(campo) {
+    return {
+      'has-error': this.verificaValidTouched(campo),
+      'has-feedback': this.verificaValidTouched(campo)
+    };
+  }
 
-consultaCEP(cep) {
-  console.log(cep);
-  cep = cep.replace(/\D/g, '');
+  consultaCEP(cep, form) {
+    cep = cep.replace(/\D/g, '');
 
-  if (cep !== '') {
+    if (cep !== '') {
 
-    const validacep = /^[0-9]{8}$/;
+      const validacep = /^[0-9]{8}$/;
 
-    if (validacep.test(cep)) {
-      this.http.get(`//viacep.com.br/ws/${cep}/json`)
-      .pipe(map(dados => dados.json()))
-      .subscribe(dados => console.log(dados));
+      if (validacep.test(cep)) {
+        this.resetForm(form);
+        this.http.get(`//viacep.com.br/ws/${cep}/json`)
+          .pipe(map(dados => dados.json()))
+          .subscribe(dados => this.populaDadosForm(dados, form));
 
+      }
     }
   }
+
+  populaDadosForm(dados, formulario) {
+    // formulario.setValue({
+    //   'nome': formulario.value.nome,
+    //   'email': formulario.value.email,
+    //   'endereco': {
+    //     'cep': dados.cep,
+    //     'logradouro': dados.logradouro,
+    //     'numero': '',
+    //     'complemento': dados.complemento,
+    //     'bairro': dados.bairro,
+    //     'cidade': dados.localidade,
+    //     'estado ': dados.uf
+    //   }
+    // });
+
+    formulario.form.patchValue({
+      'endereco': {
+        'cep': dados.cep,
+        'logradouro': dados.logradouro,
+        'numero': '',
+        'complemento': dados.complemento,
+        'bairro': dados.bairro,
+        'cidade': dados.localidade,
+        'estado ': dados.uf
+      }
+    });
+
+  }
+
+resetForm(formulario) {
+  formulario.form.patchValue({
+    'endereco': {
+      'logradouro': null,
+      'numero': '',
+      'complemento': null,
+      'bairro': null,
+      'cidade': null,
+      'estado ': null
+    }
+  });
 }
+
 
 
 }
