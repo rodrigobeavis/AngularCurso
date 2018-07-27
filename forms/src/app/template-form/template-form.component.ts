@@ -24,6 +24,9 @@ export class TemplateFormComponent implements OnInit {
   onSubmit(form) {
     console.log(form);
     console.log(this.usuario);
+    this.http.post('https://httpbin.org/post' , JSON.stringify(form.value))
+            .pipe(map(rst => rst))
+            .subscribe(dados => console.log(dados));
   }
 
 
@@ -93,7 +96,7 @@ resetForm(formulario) {
   formulario.form.patchValue({
     'endereco': {
       'logradouro': null,
-      'numero': '',
+      'numero': null,
       'complemento': null,
       'bairro': null,
       'cidade': null,
