@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -24,8 +24,8 @@ export class DataFormComponent implements OnInit {
     // });
 
     this.formulario = this.formBuilder.group({
-      nome: [null],
-      email: [null]
+        nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+        email: [null, [Validators.required, Validators.email]]
     });
 
 
