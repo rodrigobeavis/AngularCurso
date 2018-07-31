@@ -39,7 +39,7 @@ export class DataFormComponent implements OnInit {
       .subscribe(dados => {
         console.log(dados);
         // Reseta Form
-        // this.formulario.reset();
+        // this.formulario.reset(); 
         this.resetar();
       }, (error: any) => alert('error'));
       }
