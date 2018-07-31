@@ -28,8 +28,26 @@ export class DataFormComponent implements OnInit {
         email: [null, [Validators.required, Validators.email]]
     });
 
+  }
 
+  verificaValidTouched(campo) {
+    return !this.formulario.get(campo).valid  && this.formulario.get(campo).touched;
+  //  return !campo.valid && campo.touched; // template
+  }
 
+  verificaEmailInvalido() {
+    const campoEmail = this.formulario.get('email');
+
+    if (campoEmail.errors) {
+      return campoEmail.errors['email'] && campoEmail.touched;
+    }
+  }
+
+  aplicaCssErro(campo) {
+    return {
+      'has-error': this.verificaValidTouched(campo),
+      'has-feedback': this.verificaValidTouched(campo)
+    };
   }
 
   onSubmit() {
@@ -39,7 +57,7 @@ export class DataFormComponent implements OnInit {
       .subscribe(dados => {
         console.log(dados);
         // Reseta Form
-        // this.formulario.reset(); 
+        // this.formulario.reset();
         this.resetar();
       }, (error: any) => alert('error'));
       }
