@@ -1,7 +1,10 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
+import { DropdownService } from '../shared/services/dropdown.service';
+import { EstadoBr } from '../shared/models/estado-br.model';
 
 @Component({
   selector: 'app-data-form',
@@ -12,9 +15,14 @@ export class DataFormComponent implements OnInit {
 
   // Objeto que vai representar o form no DOM Formulario
   formulario: FormGroup;
+   estados: EstadoBr[];
 
-  constructor(private formBuilder: FormBuilder,
-    private http: Http) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: Http,
+    private dropDownService: DropdownService
+
+  ) { }
 
   ngOnInit() {
 
@@ -40,10 +48,13 @@ export class DataFormComponent implements OnInit {
       })
     });
 
+    this.dropDownService.getEstadosBr()
+    .subscribe(dados => {this.estados = dados; console.log(dados); });
+
   }
 
   verificaValidTouched(campo: string) {
-    return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
+    return !this.formulario.get(campo).valid && (this.formulario.get(campo).touched || this.formulario.get(campo).dirty);
     //  return !campo.valid && campo.touched; // template
   }
 
@@ -64,14 +75,39 @@ export class DataFormComponent implements OnInit {
 
   onSubmit() {
     console.log(this.formulario);
-    this.http.post('https://httpbin.org/post', JSON.stringify(this.formulario.value))
-      .pipe(map(rst => rst))
-      .subscribe(dados => {
-        console.log(dados);
-        // Reseta Form
-        // this.formulario.reset();
-        this.resetar();
-      }, (error: any) => alert('error'));
+    if (this.formulario.valid) {
+      this.http.post('https://httpbin.org/post', JSON.stringify(this.formulario.value))
+        .pipe(map(rst => rst))
+        .subscribe(dados => {
+          console.log(dados);
+          // Reseta Form
+          // this.formulario.reset();
+          this.resetar();
+        }, (error: any) => alert('error'));
+    } else {
+      // formulário sem formGroup
+      //
+      // console.log('formulario inválido');
+      // Object.keys(this.formulario.controls).forEach(campo => {
+      //   console.log(campo);
+      //   const controle = this.formulario.get(campo);
+      //   controle.markAsDirty();
+      // });
+
+      console.log('formulario inválido');
+      this.verificaValidacoesFormulario(this.formulario);
+    }
+  }
+
+  verificaValidacoesFormulario(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(campo => {
+      console.log(campo);
+      const controle = formGroup.get(campo);
+      controle.markAsDirty();
+      if (controle instanceof FormGroup) {
+        this.verificaValidacoesFormulario(controle);
+      }
+    });
   }
 
 
@@ -79,8 +115,6 @@ export class DataFormComponent implements OnInit {
     this.formulario.reset();
   }
 
-
-  
   populaDadosForm(dados) {
     // formulario.setValue({
     //   'nome': formulario.value.nome,
@@ -109,6 +143,7 @@ export class DataFormComponent implements OnInit {
     });
 
   }
+
 
 
   resetForm() {
@@ -143,4 +178,5 @@ export class DataFormComponent implements OnInit {
       }
     }
   }
+
 }
